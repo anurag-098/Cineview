@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- Google Fonts -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Merienda&family=Roboto+Slab&display=swap" rel="stylesheet"> -->
+
+
+
+    <%- include('partials/headers')%>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/celebSearch.css">
+        <title>Search Celebrities</title>
+</head>
+
+<body>
+
+    <%- include('partials/navbar')%>
+
+
+        <main class="container mt-5">
+            <section id="sarea">
+                <form action="" id="searchbar">
+                    <div class="h3" id="slabel">
+                        <label for="search">
+                            Search for a celebrity
+
+                        </label>
+                    </div>
+                    <div class="input-group ">
+                        <input type="text" class="form-control" id="search" placeholder="Robert Downey Jr."
+                            autocomplete="name">
+                        <span>
+                            <button type="submit" class="btn btn-secondary" id="sbutton"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg></button>
+                        </span>
+                    </div>
+
+                </form>
+                <ul class="list-group" id="results">
+
+                </ul>
+            </section>
+        </main>
+
+
+        <script src="/js/celebSearch.js" charset="utf-8"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
