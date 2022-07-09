@@ -2,8 +2,8 @@ const main = document.querySelector('main');
 const imdbId = window.location.search.match(/imdbId=(.*)/)[1];
 const BASE_URL = 'https://cineview-alpha.vercel.app/';
 
-const trailer_url = 'https://imdb-api.com/API/YouTubeTrailer/k_4e7sn9re/';
-const ratings_url = 'https://imdb-api.com/en/API/Ratings/k_926a00hc/'
+const trailer_url = 'https://imdb-api.com/API/YouTubeTrailer/k_dnrwu6m1/';
+const ratings_url = 'https://imdb-api.com/en/API/Ratings/k_dnrwu6m1/'
 
 
 

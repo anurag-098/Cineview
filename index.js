@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import scraper from './scraper.js';
 import mongoose from "mongoose";
-import './connect.js';
+// import './connect.js';
 import path from 'path';
 
 
@@ -13,35 +13,35 @@ const app = express();
 app.use(cors());
 
 //import path from 'path';
-const userSchema = new mongoose.Schema({
-    fullname: {
-        type: String,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    phone: {
-        type: Number,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    confirmpassword: {
-        type: String,
-        required: true
-    }
-})
+// const userSchema = new mongoose.Schema({
+//     fullname: {
+//         type: String,
+//         required: true
+//     },
+//     username: {
+//         type: String,
+//         required: true
+//     },
+//     email: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     phone: {
+//         type: Number,
+//         required: true
+//     },
+//     password: {
+//         type: String,
+//         required: true
+//     },
+//     confirmpassword: {
+//         type: String,
+//         required: true
+//     }
+// })
 
-const User = new mongoose.model("User", userSchema);
+// const User = new mongoose.model("User", userSchema);
 
 
 
@@ -148,59 +148,55 @@ app.get('/celeb/:imdbId', (req, res) => {
         });
 
 });
-app.get('/signup', (req, res) => {
-    res.render('signup');
-});
+// app.get('/signup', (req, res) => {
+//     res.render('signup');
+// });
 
-app.post("/signup", async (req, res) => {
-    try {
-        const password = req.body.password;
-        const confirm = req.body.confirmpassword;
-        if (password == confirm) {
-            const registerUser = new User({
-                fullname: req.body.fullname,
-                username: req.body.username,
-                email: req.body.email,
-                phone: req.body.phone,
-                password: req.body.password,
-                confirmpassword: req.body.confirmpassword
-            })
-            const registered = await registerUser.save();
-            res.send("you are signed up successfully");
-        }
-        else {
-            res.send("your passwords are not matching");
-        }
-    } catch (error) {
-        console.log(error);
-    }
-    // console.log(req.body);
-    // res.send("your are singed up");
+// app.post("/signup", async (req, res) => {
+//     try {
+//         const password = req.body.password;
+//         const confirm = req.body.confirmpassword;
+//         if (password == confirm) {
+//             const registerUser = new User({
+//                 fullname: req.body.fullname,
+//                 username: req.body.username,
+//                 email: req.body.email,
+//                 phone: req.body.phone,
+//                 password: req.body.password,
+//                 confirmpassword: req.body.confirmpassword
+//             })
+//             const registered = await registerUser.save();
+//             res.send("you are signed up successfully");
+//         }
+//         else {
+//             res.send("your passwords are not matching");
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// })
 
-})
+// app.get('/login', (req, res) => {
+//     res.render('login');
+// });
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
+// app.post("/login", async (req, res) => {
 
-app.post("/login", async (req, res) => {
+//     try {
+//         const username = req.body.username;
+//         const password = req.body.password;
+//         const check = await User.findOne({ username: username })
+//         if (check.password == password) {
+//             res.send("yes you are signed up");
+//         }
+//         else {
+//             res.send("username or password is incorrect");
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
 
-    try {
-        const username = req.body.username;
-        const password = req.body.password;
-        const check = await User.findOne({ username: username })
-        if (check.password == password) {
-            res.send("yes you are signed up");
-        }
-        else {
-            res.send("username or password is incorrect");
-        }
-    } catch (error) {
-        console.log(error);
-    }
-
-})
-
+// })
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

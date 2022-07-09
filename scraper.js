@@ -9,9 +9,9 @@ const showSearchUrl = "https://www.imdb.com/find?s=tt&ttype=tv&ref_=fn_tv&q=";
 const searchurl = "https://www.imdb.com/find?s=tt&ttype=ft&ref_=fn_ft&q=";
 const celebSearchUrl = "https://www.imdb.com/find?s=nm&ref_=fn_nm&q="
 const movieurl = "https://www.imdb.com/title/";
-const celebUrl = "https://imdb-api.com/en/API/Name/k_wwc99gg7/";
-const bourl = "https://imdb-api.com/en/API/BoxOffice/k_t93kn9l9";
-const comingsoon = "https://imdb-api.com/en/API/ComingSoon/k_8kz40a5u";
+const celebUrl = "https://imdb-api.com/en/API/Name/k_dnrwu6m1/";
+const bourl = "https://imdb-api.com/en/API/BoxOffice/k_dnrwu6m1";
+const comingsoon = "https://imdb-api.com/en/API/ComingSoon/k_dnrwu6m1";
 
 
 const searchCache = {};
