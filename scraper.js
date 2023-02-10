@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 const showSearchUrl = "https://www.imdb.com/find?s=tt&ttype=tv&ref_=fn_tv&q=";
-const searchurl = "https://www.imdb.com/find?s=tt&ttype=ft&ref_=fn_ft&q=";
+const searchurl = "https://www.imdb.com/find/?ref_=nv_sr_sm&q=";
 const celebSearchUrl = "https://www.imdb.com/find?s=nm&ref_=fn_nm&q="
 const movieurl = "https://www.imdb.com/title/";
 const celebUrl = "https://imdb-api.com/en/API/Name/k_dnrwu6m1/";
@@ -30,12 +30,13 @@ async function searchMovies(searchTerm) {
     const body = await response.text();
     const movies = [];
     const $ = cheerio.load(body);
-    $('.findResult').each(function (i, element) {
+    $('ul .find-result-item').each(function (i, element) {
         const $element = $(element);
-        const $image = $element.find('td a img');
-        const $title = $element.find('td.result_text a');
+        const $image = $element.find('div div img');
+        const $title = $element.find('div:nth-child(2) div a');
 
-        const imdbId = $title.attr('href').match(/title\/(.*)\//)[1];
+         const imdbId = $title.attr('href').match(/title\/(.*)\//);
+         console.log(imdbId);
         const movie = {
             image: $image.attr('src'),
             title: $title.text(),
@@ -43,7 +44,9 @@ async function searchMovies(searchTerm) {
         };
         movies.push(movie);
     });
+    console.log(movies);
     searchCache[searchTerm] = movies;
+    console.log("hi")
     return movies;
 }
 
@@ -89,7 +92,7 @@ async function searchCelebs(searchTerm) {
     const $ = cheerio.load(body);
     $('.findResult').each(function (i, element) {
         const $element = $(element);
-        const $image = $element.find('td a img');
+        const $image = $element.find('.find-result-item div div img');
         const $title = $element.find('td.result_text a');
 
         const imdbId = $title.attr('href').match(/name\/(.*)\//)[1];

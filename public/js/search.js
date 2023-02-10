@@ -1,7 +1,7 @@
 const form = document.querySelector('form');
 const searchInput = document.querySelector('input');
 const resultsList = document.querySelector('#results');
-const BASE_URL = 'https://cineview-alpha.vercel.app/';
+const BASE_URL = 'http://localhost:3000/';
 
 
 form.addEventListener('submit', formsubmitted);
@@ -37,8 +37,7 @@ function showResults(results) {
         a.textContent = movie.title;
         a.href = 'movie?imdbId=' + movie.imdbId;
         li.appendChild(a);
-
-
         resultsList.appendChild(li);
+        
     });
 }
