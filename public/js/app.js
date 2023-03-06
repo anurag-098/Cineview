@@ -9,7 +9,7 @@ function getboxcom() {
 }
 
 function showboxcom(collec) {
-console.log(collec[1]);
+
     let list = '';
     for (let i = 0; i < collec[0].length && i<12; i++) {
         if(collec[0][i].image=="https://imdb-api.com/images/original/nopicture.jpg"){
