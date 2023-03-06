@@ -36,15 +36,17 @@ async function searchMovies(searchTerm) {
         const $title = $element.find('div:nth-child(2) div a');
 
          const imdbId = $title.attr('href').match(/title\/(.*)\//);
-         console.log(imdbId);
-        const movie = {
-            image: $image.attr('src'),
-            title: $title.text(),
-            imdbId
-        };
-        movies.push(movie);
+         if(imdbId!=null){
+            const movie = {
+                image: $image.attr('src'),
+                title: $title.text(),
+                imdbId:imdbId[1]
+            };    
+            movies.push(movie);
+         } 
+       
     });
-    console.log(movies);
+    // console.log(movies);
     searchCache[searchTerm] = movies;
     console.log("hi")
     return movies;
