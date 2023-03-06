@@ -1,8 +1,8 @@
 const form = document.querySelector('form');
 const searchInput = document.querySelector('input');
 const resultsList = document.querySelector('#results');
-const BASE_URL = 'https://cineview-alpha.vercel.app/';
-// http://localhost:3000/
+const BASE_URL = 'https://cineview-alpha.vercel.app/home';
+// 
 
 form.addEventListener('submit', formsubmitted);
 

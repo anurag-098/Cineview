@@ -5,9 +5,9 @@ import { response } from 'express';
 import axios from 'axios';
 
 
-const showSearchUrl = "https://www.imdb.com/find?s=tt&ttype=tv&ref_=fn_tv&q=";
+const showSearchUrl = "https://www.imdb.com/find/?s=tt&ttype=tv&ref_=fn_tv&q=";
 const searchurl = "https://www.imdb.com/find/?ref_=nv_sr_sm&q=";
-const celebSearchUrl = "https://www.imdb.com/find?s=nm&ref_=fn_nm&q="
+const celebSearchUrl = "https://www.imdb.com/find/?s=nm&ref_=nv_sr_sm&q="
 const movieurl = "https://www.imdb.com/title/";
 const celebUrl = "https://imdb-api.com/en/API/Name/k_dnrwu6m1/";
 const bourl = "https://imdb-api.com/en/API/BoxOffice/k_dnrwu6m1";
@@ -48,7 +48,6 @@ async function searchMovies(searchTerm) {
     });
     // console.log(movies);
     searchCache[searchTerm] = movies;
-    console.log("hi")
     return movies;
 }
 
@@ -60,21 +59,24 @@ async function searchShows(searchTerm) {
         return Promise.resolve(searchCache[searchTerm]);
     }
     const response = await fetch(`${showSearchUrl}${searchTerm}`);
+    
     const body = await response.text();
     const shows = [];
     const $ = cheerio.load(body);
-    $('.findResult').each(function (i, element) {
+    $('ul .find-result-item').each(function (i, element) {
         const $element = $(element);
-        const $image = $element.find('td a img');
-        const $title = $element.find('td.result_text a');
+        const $image = $element.find('div div img');
+        const $title = $element.find('div:nth-child(2) div a');
 
-        const imdbId = $title.attr('href').match(/title\/(.*)\//)[1];
+        const imdbId = $title.attr('href').match(/title\/(.*)\//);
+        if(imdbId!=null){
         const show = {
             image: $image.attr('src'),
             title: $title.text(),
-            imdbId
+            imdbId:imdbId[1]
         };
         shows.push(show);
+    }
     });
     searchCache[searchTerm] = shows;
     return shows;
@@ -90,20 +92,23 @@ async function searchCelebs(searchTerm) {
     }
     const response = await fetch(`${celebSearchUrl}${searchTerm}`);
     const body = await response.text();
+    
     const celebs = [];
     const $ = cheerio.load(body);
-    $('.findResult').each(function (i, element) {
+    $('ul .find-result-item').each(function (i, element) {
         const $element = $(element);
-        const $image = $element.find('.find-result-item div div img');
-        const $title = $element.find('td.result_text a');
+        const $image = $element.find('div div img');
+        const $title = $element.find('div:nth-child(2) div a');
 
-        const imdbId = $title.attr('href').match(/name\/(.*)\//)[1];
+        const imdbId = $title.attr('href').match(/name\/(.*)\//);
+        if(imdbId!=null&&$image.attr('src')!=undefined){
         const celeb = {
             image: $image.attr('src'),
             title: $title.text(),
-            imdbId
+            imdbId:imdbId[1]
         };
         celebs.push(celeb);
+    }
     });
     searchCache[searchTerm] = celebs;
     return celebs;
