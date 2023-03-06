@@ -9,9 +9,12 @@ function getboxcom() {
 }
 
 function showboxcom(collec) {
-
+console.log(collec[1]);
     let list = '';
-    for (let i = 0; i < collec[0].length; i++) {
+    for (let i = 0; i < collec[0].length && i<12; i++) {
+        if(collec[0][i].image=="https://imdb-api.com/images/original/nopicture.jpg"){
+            continue;
+    }
         list += `
             <div id="bcard">
             <a href="https://cineview-alpha.vercel.app/movie?imdbId=${collec[0][i].id}">
@@ -30,7 +33,10 @@ function showboxcom(collec) {
     bosection.innerHTML = list;
 
     let list2 = '';
-    for (let i = 0; i < collec[1].length; i++) {
+    for (let i = 0; i < collec[1].length && i<12; i++) {
+        if(collec[1][i].image=="https://imdb-api.com/images/original/nopicture.jpg"){
+            continue;
+    }
         list2 += `
         <div id="bcard">
         <a href="https://cineview-alpha.vercel.app/movie?imdbId=${collec[1][i].id}">
@@ -45,8 +51,9 @@ function showboxcom(collec) {
 </div>
 </a> 
 </div>`;
-    };
+            };
     cssection.innerHTML = list2;
+
 }
 
 getboxcom()

@@ -384,7 +384,7 @@ async function home() {
             };
             com.push(obj2);
         }
-
+console.log(com);
         collec.push(box);
         collec.push(com);
 
