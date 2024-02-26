@@ -129,11 +129,11 @@ function getMovie(imdbId) {
         .then(body => {
             const $ = cheerio.load(body);
 
+            
+            const title = $('[data-testid="hero__primary-text"]').text();
 
-            const title = $('[data-testid="hero-title-block__title"]').text();
-
-            const rating = $('[data-testid="hero-title-block__metadata"] li:nth-child(2) a').text();
-            const runtime = $('[data-testid="hero-title-block__metadata"] li:nth-child(3) ').text();
+            const rating = $('[data-testid="hero__pageTitle"]+ul li:nth-child(2)').text();
+            const runtime = $('[data-testid="hero__pageTitle"]+ul li:nth-child(3)').text();
 
             const irating = [];
             while (irating.length <= 1) {
@@ -162,8 +162,6 @@ function getMovie(imdbId) {
 
             });
 
-            const storyline = $('[data-testid="storyline-plot-summary"] div div').text();
-
             const budget = $('[data-testid="title-boxoffice-budget"]').text();
 
             const casts = [];
@@ -172,7 +170,7 @@ function getMovie(imdbId) {
                 const $element = $(element);
                 const $image = $element.find('[data-testid="title-cast-item__avatar"] div div img');
                 const $name = $element.find('[data-testid="title-cast-item__actor"]');
-                const $role = $element.find('[data-testid="cast-item-characters-with-as"]');
+                const $role = $element.find('[data-testid="cast-item-characters-link"]');
                 const cast = {
                     image: $image.attr('src'),
                     title: $name.text(),
@@ -190,12 +188,10 @@ function getMovie(imdbId) {
                 irating: irating[0],
                 rdate,
                 plot,
-                storyline,
                 budget,
                 cast: casts,
                 director: directors.slice(0, (directors.length) / 2),
                 writer: writers.slice(0, (writers.length) / 2),
-
             };
 
             movieCache[imdbId] = movie;
@@ -216,10 +212,9 @@ function getShow(imdbId) {
         .then(body => {
             const $ = cheerio.load(body);
 
-            const title = $('[data-testid="hero-title-block__title"]').text();
+            const title = $('[data-testid="hero__primary-text"]').text();
 
-            const rating = $('[data-testid="hero-title-block__metadata"] li:nth-child(3) a').text();
-            const releaseinfo = $('[data-testid="hero-title-block__metadata"] li:nth-child(2) a ').text();
+            const rating = $('[data-testid="hero__pageTitle"]+ul li:nth-child(2)').text();
 
 
             const irating = [];
@@ -249,7 +244,6 @@ function getShow(imdbId) {
 
             });
 
-            const storyline = $('[data-testid="storyline-plot-summary"] div div').text();
 
             const casts = [];
 
@@ -257,7 +251,7 @@ function getShow(imdbId) {
                 const $element = $(element);
                 const $image = $element.find('[data-testid="title-cast-item__avatar"] div div img');
                 const $name = $element.find('[data-testid="title-cast-item__actor"]');
-                const $role = $element.find('[data-testid="cast-item-characters-with-as"]');
+                const $role = $element.find('[data-testid="cast-item-characters-link"]');
                 const cast = {
                     image: $image.attr('src'),
                     title: $name.text(),
@@ -270,12 +264,10 @@ function getShow(imdbId) {
                 title,
                 poster,
                 rating,
-                releaseinfo,
                 genres: [$genre1, $genre2, $genre3],
                 irating: irating[0],
                 rdate,
                 plot,
-                storyline,
                 cast: casts,
                 director: directors.slice(0, (directors.length) / 2),
                 writer: writers.slice(0, (writers.length) / 2),

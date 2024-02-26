@@ -87,6 +87,15 @@ main{
 #description{
 	font-size: 1.2rem;
 }
+
+dl{
+	line-height: 1.6;
+}
+
+dl dd{
+	margin-bottom: 10px;
+}
+
 #title{
     font-family: 'Playfair Display', serif;
 	
